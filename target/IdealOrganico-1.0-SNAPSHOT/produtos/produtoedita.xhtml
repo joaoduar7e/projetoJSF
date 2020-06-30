@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/index.xhtml">
+        <ui:define name="body">
+            <h1 align="center">Cadastro de Produto</h1>
+            <br/>
+            <h:form>
+                <div align="center">
+                 <p:message for="nome"/>
+                 <p:message for="preco"/>
+                 <p:message for="estoque"/>
+                <!--<p:growl/>-->
+                <p:panelGrid columns="2">
+                    Nome:<p:inputText value="#{produtoControle.produto.nome}"
+                                      size="60" id="nome" required="true" requiredMessage="O nome é obrigatório!"/>
+                    Grupo de Produtos <p:selectOneMenu value="#{produtoControle.produto.grupoDeProdutos}" id="grupoDeProdutos"
+                                     required="true" requiredMessage="O grupoDeProdutos é obrigatório!"
+                                     converter="#{produtoControle.grupoDeProdutosConverter}">
+                        <f:selectItems  value="#{produtoControle.listaGrupoDeProdutos}" var="prod"
+                                itemLabel="#{prod.nome}"
+                                itemValue="#{prod}"/>
+                    </p:selectOneMenu>
+                 
+                    Preço:<p:inputText value="#{produtoControle.produto.preco}" 
+                                       size="10" id="preco" required="true"/>
+                    Estoque:<p:inputText value="#{produtoControle.produto.estoque}" 
+                                         size="10" id="estoque" required="false"/>
+                    
+                </p:panelGrid>
+                <p:commandButton value="Salvar" ajax="false"
+                                 actionListener="#{produtoControle.salvar()}"
+
+                                 /> 
+<!--                <p:commandButton value="Cancelar" ajax="false" action="produtolista" immediate="true"/>-->
+                </div>
+            </h:form>
+            
+                        <h1 align="center">Produtos Cadastrados</h1>
+
+        <h:form>
+        <div align="center">   
+            
+<!--        var representa os objetos-->
+            <p:dataTable value="#{produtoControle.listaProdutos}" var="prod"
+                         
+                         rows="5"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                         rowsPerPageTemplate="3,5,10,15"
+                         emptyMessage="Nenhum produto cadastrado"
+                         >
+                
+                <p:column headerText="Nome" filterBy="#{prod.nome}" filterMatchMode="contains">
+                    #{prod.nome}
+                </p:column>
+                
+                <p:column headerText="Grupo de Produto" filterBy="#{prod.grupoDeProdutos}" filterMatchMode="contains">
+                    #{prod.grupoDeProdutos}
+                </p:column>
+                <p:column headerText="Preço" filterBy="#{prod.preco}" filterMatchMode="contains">
+                    #{prod.preco}
+                </p:column>
+                <p:column headerText="Estoque" filterBy="#{prod.estoque}" filterMatchMode="contains">
+                    #{prod.estoque}
+                </p:column>
+               
+
+                <p:column>
+                    <p:commandButton icon="ui-icon-trash" value="Remover" ajax="false"
+                                     immediate="true"
+                                     actionListener="#{produtoControle.remover(prod)}"/>
+                
+                    <p:commandButton icon="ui-icon-pencil" value="Editar" ajax="false"
+                                     immediate="true"
+                                     actionListener="#{produtoControle.editar(prod)}"
+                                     action="produtoedita"/>
+                </p:column>
+                
+
+            </p:dataTable>
+<!--                    <p:commandButton value="Novo Estado" action="produtoedita"/>-->
+            <p:commandButton value="Novo Produto" ajax="false"  
+                                 actionListener="#{produtoControle.novo()}"
+                                 action="produtoedita"/>
+         </div>  
+            </h:form>
+                        
+        </ui:define>
+    </ui:composition>
+</html>

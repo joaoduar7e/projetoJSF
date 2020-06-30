@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    
+    <h:head>
+        <title>Sistema Ideal Orgânico</title>
+
+    </h:head>
+    
+<br/>
+
+    <h:body>
+
+        
+        <p:layout fullPage="true">
+            <!--                cabeçalho-->
+            <p:layoutUnit position="north" size="110" style="text-align: center">
+                <h1> Sistema Ideal Orgânico </h1>
+            </p:layoutUnit>
+            
+            <!--                rodapé-->
+            <p:layoutUnit position="south" size="40" style="text-align: center">
+                Todos os diretiros reservados @2020
+            </p:layoutUnit> 
+            
+            <!--                menu da pagina-->   
+            <p:layoutUnit position="west">
+                
+                <h:form>
+                    <p:panelMenu style="width: 160px">
+                        <p:submenu label="Cadastros" rendered="true">
+                            <p:menuitem value="Cliente" ajax="false" action="/cliente/alunoedita"/>
+                        <p:submenu label="Produtos" rendered="true">
+                            <p:menuitem value="Produtos" ajax="false" action="/produtos/produtoedita"/>
+                            <p:menuitem value="Grupo de Produtos" ajax="false" action="/grupodeprodutos/grupoprodedita"/>
+                        </p:submenu>              
+                        <p:submenu label="Locais" rendered="true">
+                            <p:menuitem value="Estado" ajax="false" action="/estado/estadoedita"/>
+                            <p:menuitem value="Cidade" ajax="false" action="/cidade/cidadeedita"/>
+                        </p:submenu>
+                         </p:submenu>
+
+
+                    </p:panelMenu>
+<!--                    <p:menu style="width: 160px">
+                        
+                        <p:submenu label="Cadastros" rendered="true">
+                            <p:menuitem value="Aluno" ajax="false" action="/alunoedita"/>
+                            <p:menuitem value="Estado" ajax="false" action="/estado/estadoedita"/>
+                            <p:menuitem value="Cidade" ajax="false" action="/cidade/cidadeedita"/>
+                        </p:submenu>
+                        <p:submenu label="Informações Cadastradas" rendered="true">
+                            <p:menuitem value="Alunos" ajax="false" action="/alunolista"/>
+                            <p:menuitem value="Estados" ajax="false" action="/estado/estadolista"/>
+                            <p:menuitem value="Cidades" ajax="false" action="/cidade/cidadelista"/>
+
+                        </p:submenu>
+                       </p:menu>-->
+                    
+                    
+                </h:form>
+            </p:layoutUnit>
+            
+            <!--            conteudo-->
+            <p:layoutUnit position="center" >
+                <ui:insert id="corpo" name="body">
+                    <div align="center">
+                    <h1 >Seja bem vindo!</h1>
+                    <img src="logo.jpg" width="750" ></img>
+                     </div>
+                </ui:insert>
+            </p:layoutUnit>
+            
+        </p:layout>
+
+    </h:body>
+</html>
+
