@@ -5,8 +5,11 @@
  */
 package controladores;
 
+import converter.ConverterGenerico;
 import entidades.Aluno;
+import entidades.Cidade;
 import facade.AlunoFacade;
+import facade.CidadeFacade;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -21,6 +24,27 @@ public class AlunoControle {
     private Aluno aluno = new Aluno();
     @EJB
     private AlunoFacade alunoFacade;
+    @EJB
+    private CidadeFacade cidadeFacade;
+    private ConverterGenerico cidadeConverter;
+
+        public ConverterGenerico getCidadeConverter() {
+        if(cidadeConverter == null){
+            cidadeConverter = new ConverterGenerico(cidadeFacade);
+        }
+        return cidadeConverter;
+    }
+
+    public void setCidadeConverter(ConverterGenerico cidadeConverter) {
+        this.cidadeConverter = cidadeConverter;
+    }
+    
+    public List<Cidade> getListaCidadesFiltrando(String parte){
+        return cidadeFacade.listaFiltrando(parte, "nome");
+    
+    }
+    
+
     
     public void novo(){
     aluno = new Aluno();

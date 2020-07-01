@@ -30,5 +30,13 @@ public class AlunoFacade extends AbstractFacade<Aluno>{
         super(Aluno.class);
     }
     
+        public List<Aluno> listaPessoaFiltrando(String filtro) {
+        Query q = getEntityManager().createQuery("from Pessoa where nome like :parametro");
+        q.setParameter("parametro", "%"+filtro+"%");
+        return q.getResultList();
+    }
+
 }
+
+
 

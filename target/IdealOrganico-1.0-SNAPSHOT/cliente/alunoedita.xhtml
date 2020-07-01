@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <ui:composition template="/index.xhtml">
         <ui:define name="body">
@@ -15,18 +16,14 @@
                  <p:message for="endereco"/>
                  <p:message for="ra"/>
                  <p:message for="nome"/>
+                 <p:message for="cidade"/>
                 
                 <div align="center"> 
                 <p:panelGrid columns="2">
 <!--             value - atrbui o valor direta inserido no atributo "nome"  -->
             Nome: <p:inputText value="#{alunoControle.aluno.nome}" id="nome" size="31"
-                               placeholder="Escreva o nome do Aluno!" 
+                               placeholder="Escreva o nome do cliente!" 
                                required="true" requiredMessage="O nome é obrigatório!" />
-        
-                        
-<!--            Telefone: <p:inputNumber value="#{alunoControle.aluno.ra}" id="ra" size="31" 
-                               placeholder="O Telefone deve contém apenas números" 
-                               required="true" requiredMessage="O telefone é obrigatório!"/>-->
             
             Telefone:<p:inputMask mask="(99)9999-9999"
                                value="#{alunoControle.aluno.ra}" id="ra" size="31" 
@@ -35,19 +32,20 @@
     
             
             Endereço: <p:inputText value="#{alunoControle.aluno.endereco}" id="endereco" size="31"
-                               placeholder="Escreva o endereço do Aluno!"  required="true"
+                               placeholder="Escreva o endereço do cliente!"  required="true"
                                requiredMessage="O endereço é obrigatório!" />
+            Número: <p:inputText value="#{alunoControle.aluno.numero}" id="numero" size="31"
+                               placeholder="Escreva o número de endereço do cliente!" />
+            Cidade: <p:autoComplete value="#{alunoControle.aluno.cidade}" completeMethod="#{alunoControle.getListaCidadesFiltrando}" 
+                                    var="cid" id="cidade" forceSelection="true"
+                                    itemLabel="#{cid.nome}"
+                                    itemValue="#{cid}"                                   
+                                    converter="#{alunoControle.cidadeConverter}"
+                                    placeholder="Escreva a cidade do cliente!"
+                                    required="true" requiredMessage="A cidade é obrigatória!"/>
+        
 
-            </p:selectOneMenu>
-
-            
-             
-           
-            
-
-            
-        </p:panelGrid>
-            
+                    </p:panelGrid>
      
                     <p:commandButton value="Salvar" ajax="false" actionListener="#{alunoControle.salvar()}"/>
                 
@@ -79,6 +77,12 @@
                 
                 <p:column headerText="Endereço" filterBy="#{aluno.endereco}" filterMatchMode="contains">
                     #{aluno.endereco}
+                </p:column>
+                <p:column headerText="Número" filterBy="#{aluno.numero}" filterMatchMode="contains">
+                    #{aluno.numero}
+                </p:column>
+                <p:column headerText="Cidade" filterBy="#{aluno.cidade.nome}" filterMatchMode="contains">
+                    #{aluno.cidade.nome}
                 </p:column>
                 
 

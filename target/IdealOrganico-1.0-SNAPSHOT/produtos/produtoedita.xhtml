@@ -28,7 +28,11 @@
                     </p:selectOneMenu>
                  
                     Preço:<p:inputText value="#{produtoControle.produto.preco}" 
-                                       size="10" id="preco" required="true"/>
+                                       size="10" id="preco" required="true"
+                                        converter="#{produtoControle.moneyConverter}">
+                        <f:convertNumber pattern="##,###,###,###.##" minFractionDigits="2"/>
+                        <p:ajax update="preco" process="preco" event="change"/>
+                    </p:inputText>
                     Estoque:<p:inputText value="#{produtoControle.produto.estoque}" 
                                          size="10" id="estoque" required="false"/>
                     

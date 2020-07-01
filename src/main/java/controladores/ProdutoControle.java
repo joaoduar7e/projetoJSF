@@ -6,6 +6,7 @@
 package controladores;
 
 import converter.ConverterGenerico;
+import converter.MoneyConverter;
 import entidades.GrupoDeProdutos;
 import entidades.Produto;
 import facade.ProdutoFacade;
@@ -18,7 +19,7 @@ import javax.faces.bean.SessionScoped;
 
 /**
  *
- * @author jaimedias
+ * @author Joao Duarte
  */
 @ManagedBean
 @SessionScoped
@@ -26,10 +27,31 @@ public class ProdutoControle implements Serializable{
 
     private Produto produto;
     @EJB
-    private ProdutoFacade produtoFacade;
-    @EJB
     private GrupoDeProdutosFacade grupoDeProdutosFacade;
+
+    @EJB
+    private ProdutoFacade produtoFacade;
     private ConverterGenerico grupoDeProdutosConverter;
+    private MoneyConverter moneyConverter;
+
+    public ProdutoFacade getProdutoFacade() {
+        if(moneyConverter == null){
+            moneyConverter = new MoneyConverter();
+        }
+        return produtoFacade;
+    }
+
+    public void setProdutoFacade(ProdutoFacade produtoFacade) {
+        this.produtoFacade = produtoFacade;
+    }
+
+    public MoneyConverter getMoneyConverter() {
+        return moneyConverter;
+    }
+
+    public void setMoneyConverter(MoneyConverter moneyConverter) {
+        this.moneyConverter = moneyConverter;
+    }
 
     public ConverterGenerico getGrupoDeProdutosConverter() {
         if(grupoDeProdutosConverter == null){

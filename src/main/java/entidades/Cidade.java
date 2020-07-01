@@ -30,6 +30,14 @@ public class Cidade implements Serializable, ClassePai {
     @ManyToOne
     private Estado estado;
 
+        @Override
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getNome() {
         return nome;
     }
@@ -42,20 +50,10 @@ public class Cidade implements Serializable, ClassePai {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
+    public void setEstado(Estado nome) {
+        this.estado = nome;
     }
     
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;

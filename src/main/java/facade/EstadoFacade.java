@@ -25,7 +25,7 @@ import javax.persistence.PersistenceContext;
     protected EntityManager getEntityManager() {
         return em;
     }
-
+    
     public EstadoFacade() {
         super(Estado.class);
     }

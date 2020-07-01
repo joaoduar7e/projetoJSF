@@ -32,10 +32,5 @@ public class CidadeFacade extends AbstractFacade<Cidade> {
     public CidadeFacade() {
         super(Cidade.class);
     }
-        public List<Cidade> listaCidadeFiltrando(String filtro) {
-        Query q = getEntityManager().createQuery("from Cidade where nome like :parametro");
-        q.setParameter("parametro", "%"+filtro+"%");
-        return q.getResultList();
-    }
-    
+
 }
